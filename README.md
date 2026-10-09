@@ -38,4 +38,4 @@ To preview locally:
 python3 -m http.server 8765
 ```
 
-Then open http://localhost:8765.
+Then open http://localhost:8765. (Locally, use `/resume.html`. The extensionless `/resume` link only works on GitHub Pages.)
