@@ -9,7 +9,8 @@ Personal site for Greg Collins: a short about page and an online resume.
 | File | What it is |
 |---|---|
 | `index.html` | About / landing page |
-| `resume.html` | Resume / CV, with a print-friendly layout ("Print / Save PDF") |
+| `resume.html` | Resume / CV, with a "Download PDF" button and print-friendly styles |
+| `Gregory_Collins_Resume.pdf` | PDF version of the resume (phone number intentionally omitted) |
 | `styles.css` | Shared styles, including dark mode and print styles |
 | `favicon.svg`, `apple-touch-icon.png` | Browser tab and home-screen icons |
 | `images/portrait.jpg` | Portrait |
@@ -17,7 +18,7 @@ Personal site for Greg Collins: a short about page and an online resume.
 
 ## How it's built
 
-Plain HTML and CSS. No build step, frameworks, or JavaScript beyond the print button. Fonts are loaded from Google Fonts (Space Grotesk, Inter, JetBrains Mono).
+Plain HTML and CSS. No build step, frameworks, or JavaScript. Fonts are loaded from Google Fonts (Space Grotesk, Inter, JetBrains Mono).
 
 ## Hosting
 
