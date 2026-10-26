@@ -579,7 +579,7 @@ img { max-width: 100%; display: block; }
 .nav-dd-menu {
   position: absolute;
   top: calc(100% + 8px);
-  left: 0;
+  right: 0;
   z-index: 20;
   min-width: 240px;
   background: var(--surface);
