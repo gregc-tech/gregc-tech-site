@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shortcuts &mdash; Greg Collins</title>
+<meta name="description" content="Greg Collins's favorite Apple Shortcuts, ready to add to your iPhone, iPad, or Mac.">
+<link rel="canonical" href="https://gregc.tech/shortcuts/">
+<link rel="stylesheet" href="/styles.css">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shortcuts — Greg Collins">
+<meta property="og:description" content="Favorite Apple Shortcuts, ready to add to your iPhone, iPad, or Mac.">
+<meta property="og:image" content="https://gregc.tech/images/portrait.jpg">
+<meta property="og:url" content="https://gregc.tech/shortcuts/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shortcuts — Greg Collins">
+<meta name="twitter:description" content="Favorite Apple Shortcuts, ready to add to your iPhone, iPad, or Mac.">
+<meta name="twitter:image" content="https://gregc.tech/images/portrait.jpg">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="/">
+      <span class="brand-badge">gc</span>
+      <span class="wordmark">gregc<span class="dot">.</span>tech</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">About</a>
+      <details class="nav-dd">
+        <summary class="nav-dd-active">Shortcuts</summary>
+        <div class="nav-dd-menu">
+          <a href="/shortcuts/" aria-current="page">All Shortcuts</a>
+        </div>
+      </details>
+      <a href="/resume" class="cta">Resume</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="sc-tile" style="width:96px;height:96px;border-radius:26px;font-size:2.8rem;--tile-a:#ff7a8a;--tile-b:#7b5cff;box-shadow:0 18px 40px rgba(20,50,70,.35)" aria-hidden="true">⚡</div>
+    <div>
+      <span class="mono">Apple Shortcuts</span>
+      <h1>Shortcuts</h1>
+      <p>A few of my favorite Shortcuts for iPhone, iPad, and Mac. Tap one to add it to your library.</p>
+    </div>
+  </div>
+</header>
+
+<main class="section">
+
+
+  <div class="section-head">
+    <span class="mono">Favorites</span>
+    <h2>My Shortcuts</h2>
+  </div>
+
+  <p class="sc-intro">Most of these Shortcuts are ones I built myself. A few come from <a href="https://create.beard.fm/" target="_blank" rel="noopener">Stephen Robles at beard.fm</a>, so check out his Shortcuts Community!</p>
+
+  <!--
+    To add a shortcut: copy one .sc-card block below.
+    - Change the emoji, name, description, and tags.
+    - Optional tile colors: style="--tile-a:#hex;--tile-b:#hex"
+    - When the iCloud link is ready, replace the disabled <span> button with:
+      <a class="btn" href="https://www.icloud.com/shortcuts/XXXX" target="_blank" rel="noopener">Add Shortcut</a>
+  -->
+  <div class="sc-grid">
+
+    <article class="sc-card">
+      <div class="sc-tile" style="--tile-a:#ff7a8a;--tile-b:#e8193c" aria-hidden="true">🎵</div>
+      <h3>Start Favorites</h3>
+      <p>Start your Apple Music Favorites list immediately.</p>
+      <div class="sc-tags"><span class="chip">iOS</span><span class="chip">iPadOS</span></div>
+      <a class="btn" href="https://www.icloud.com/shortcuts/b993a1cb9b594e7e82453fef6eb3bb3f" target="_blank" rel="noopener">Add Shortcut</a>
+    </article>
+
+    <article class="sc-card">
+      <div class="sc-tile" style="--tile-a:#7cc4ff;--tile-b:#2563eb" aria-hidden="true">🚗</div>
+      <h3>Mileage Tracker</h3>
+      <p>Need to track your mileage for work? Run this and it will add a new line to an Apple Note.</p>
+      <div class="sc-tags"><span class="chip">iOS</span><span class="chip">iPadOS</span><span class="chip">macOS</span></div>
+      <a class="btn" href="https://www.icloud.com/shortcuts/bddef49975824ce387ab0a968885f516" target="_blank" rel="noopener">Add Shortcut</a>
+    </article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wordmark">gregc.tech</div>
+  <p>&copy; 2026 Greg Collins &middot; <a href="https://www.linkedin.com/in/gocollins" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:greg@gregc.tech">greg@gregc.tech</a></p>
+</footer>
+
+<script>
+  // Close the Shortcuts menu on outside click or Escape
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.nav-dd[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') document.querySelectorAll('.nav-dd[open]').forEach(function (d) { d.removeAttribute('open'); });
+  });
+</script>
+
+</body>
+</html>

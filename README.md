@@ -10,6 +10,7 @@ Personal site for Greg Collins: a short about page and an online resume.
 |---|---|
 | `index.html` | About / landing page |
 | `resume.html` | Resume / CV, with a "Download PDF" button and print-friendly styles |
+| `shortcuts/index.html` | Shortcuts page: favorite Apple Shortcuts with iCloud links |
 | `Gregory_Collins_Resume.pdf` | PDF version of the resume (phone number intentionally omitted) |
 | `styles.css` | Shared styles, including dark mode and print styles |
 | `favicon.svg`, `apple-touch-icon.png` | Browser tab and home-screen icons |
@@ -18,7 +19,7 @@ Personal site for Greg Collins: a short about page and an online resume.
 
 ## How it's built
 
-Plain HTML and CSS. No build step, frameworks, or JavaScript. Fonts are loaded from Google Fonts (Space Grotesk, Inter, JetBrains Mono).
+Plain HTML and CSS. No build step or frameworks; the only JavaScript closes the Shortcuts menu on outside click. Fonts are loaded from Google Fonts (Space Grotesk, Inter, JetBrains Mono).
 
 ## Hosting
 
@@ -39,4 +40,4 @@ To preview locally:
 python3 -m http.server 8765
 ```
 
-Then open http://localhost:8765. (Locally, use `/resume.html`. The extensionless `/resume` link only works on GitHub Pages.)
+Then open http://localhost:8765. (Locally, use `/resume.html`. Extensionless links like `/resume` only work on GitHub Pages.)

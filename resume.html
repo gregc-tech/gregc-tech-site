@@ -31,6 +31,12 @@
     </a>
     <div class="nav-links">
       <a href="/">About</a>
+      <details class="nav-dd">
+        <summary>Shortcuts</summary>
+        <div class="nav-dd-menu">
+          <a href="/shortcuts/">All Shortcuts</a>
+        </div>
+      </details>
       <a href="/resume" class="cta" aria-current="page">Resume</a>
     </div>
   </nav>
@@ -184,6 +190,16 @@
   <div class="wordmark">gregc.tech</div>
   <p>&copy; 2026 Greg Collins &middot; <a href="https://www.linkedin.com/in/gocollins" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:greg@gregc.tech">greg@gregc.tech</a></p>
 </footer>
+
+<script>
+  // Close the Shortcuts menu on outside click or Escape
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.nav-dd[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') document.querySelectorAll('.nav-dd[open]').forEach(function (d) { d.removeAttribute('open'); });
+  });
+</script>
 
 </body>
 </html>
