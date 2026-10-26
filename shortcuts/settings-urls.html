@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iOS/iPadOS Settings URLs &mdash; Greg Collins</title>
+<meta name="description" content="URLs that open specific screens in iOS and iPadOS Settings, for use in Apple Shortcuts.">
+<link rel="canonical" href="https://gregc.tech/shortcuts/settings-urls">
+<link rel="stylesheet" href="/styles.css">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="iOS/iPadOS Settings URLs — Greg Collins">
+<meta property="og:description" content="URLs that open specific screens in iOS and iPadOS Settings, for use in Apple Shortcuts.">
+<meta property="og:image" content="https://gregc.tech/images/portrait.jpg">
+<meta property="og:url" content="https://gregc.tech/shortcuts/settings-urls">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS/iPadOS Settings URLs — Greg Collins">
+<meta name="twitter:description" content="URLs that open specific screens in iOS and iPadOS Settings, for use in Apple Shortcuts.">
+<meta name="twitter:image" content="https://gregc.tech/images/portrait.jpg">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="/">
+      <span class="brand-badge">gc</span>
+      <span class="wordmark">gregc<span class="dot">.</span>tech</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">About</a>
+      <a href="/resume" class="cta">Resume</a>
+      <details class="nav-dd">
+        <summary class="nav-dd-active">Shortcuts</summary>
+        <div class="nav-dd-menu">
+          <a href="/shortcuts/">Shortcuts</a>
+          <a href="/shortcuts/settings-urls" aria-current="page">iOS/iPadOS Settings URLs</a>
+        </div>
+      </details>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="sc-tile" style="width:96px;height:96px;border-radius:26px;font-size:2.8rem;--tile-a:#a7b1bd;--tile-b:#4b5563;box-shadow:0 18px 40px rgba(20,50,70,.35)" aria-hidden="true">⚙️</div>
+    <div>
+      <div class="crumbs"><a href="/shortcuts/">&larr; Shortcuts</a></div>
+      <h1>iOS/iPadOS Settings URLs</h1>
+      <p>URLs that open a specific screen in Settings. Use them with the <strong>Open URLs</strong> action in Shortcuts.</p>
+    </div>
+  </div>
+</header>
+
+<main class="section">
+
+  <p class="sc-intro">Copy a URL, add an <strong>Open URLs</strong> action to a shortcut, and paste it in. This list was pulled from the iOS 27.1 simulator in October 2026. Apple doesn't document these, and they haven't all been tested on a device, so try one before you rely on it.</p>
+
+  <div class="url-tools">
+    <input class="url-search" type="search" placeholder="Search settings or URLs…" aria-label="Search settings or URLs" id="filter">
+    <select class="url-select" id="section" aria-label="Section"><option value="">All sections</option></select>
+    <div class="seg" role="group" aria-label="URL scheme">
+      <button type="button" data-s="all" aria-pressed="true">All</button>
+      <button type="button" data-s="prefs" aria-pressed="false">prefs:</button>
+      <button type="button" data-s="settings-navigation" aria-pressed="false">settings-navigation://</button>
+    </div>
+  </div>
+  <p class="url-count" id="count" aria-live="polite">Loading…</p>
+
+  <div id="url-list"></div>
+  <p class="no-results" id="no-results">No settings match that search.</p>
+
+  <section class="url-about">
+    <h2>About this list</h2>
+    <ul>
+      <li><code>prefs:</code> is the older scheme most Shortcuts examples use. <code>App-prefs:</code> works the same way.</li>
+      <li><code>settings-navigation://</code> is the newer scheme and can reach deeper screens.</li>
+      <li><span class="url-tag action">Action</span> starts a flow, like a sheet, setup step, or sign-in, instead of just showing a page.</li>
+      <li><span class="url-tag caution">Caution</span> opens a page that can reset, erase, or sign out. Read carefully before tapping anything there.</li>
+      <li>Per-app pages likely follow <code>settings-navigation://com.apple.Settings.Apps/&lt;bundle ID&gt;</code>, including third-party apps. That's unverified.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wordmark">gregc.tech</div>
+  <p>&copy; 2026 Greg Collins &middot; <a href="https://www.linkedin.com/in/gocollins" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:greg@gregc.tech">greg@gregc.tech</a></p>
+  <p class="footer-note">gregc.tech was created using Claude Code.</p>
+</footer>
+
+<script>
+  // Settings URL list: loads settings-urls.json, then filters by text, section, and scheme
+  (function () {
+    var list = document.getElementById('url-list');
+    var q = document.getElementById('filter');
+    var sec = document.getElementById('section');
+    var countEl = document.getElementById('count');
+    var empty = document.getElementById('no-results');
+    var scheme = 'all';
+    var rows = [], sections = [];
+
+    function esc(t) {
+      return t.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+    }
+
+    function noteTag(note) {
+      if (!note) return '';
+      var cls = note === 'Action' ? 'action' : note === 'Caution' ? 'caution' : '';
+      return ' <span class="url-tag ' + cls + '">' + esc(note) + '</span>';
+    }
+
+    function render() {
+      var words = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+      var hits = rows.filter(function (r) {
+        if (scheme !== 'all' && r.scheme !== scheme) return false;
+        if (sec.value && r.section !== sec.value) return false;
+        var hay = (r.title + ' ' + r.url + ' ' + r.section + ' ' + r.note).toLowerCase();
+        return words.every(function (w) { return hay.indexOf(w) !== -1; });
+      });
+      var html = '';
+      sections.forEach(function (s) {
+        var group = hits.filter(function (r) { return r.section === s; });
+        if (!group.length) return;
+        html += '<section class="url-group"><h2>' + esc(s) + '</h2>' + group.map(function (r) {
+          return '<div class="url-row"><span class="name">' + esc(r.title) + noteTag(r.note) + '</span>' +
+                 '<code>' + esc(r.url) + '</code>' +
+                 '<button class="copy-btn" type="button" data-i="' + rows.indexOf(r) + '">Copy</button></div>';
+        }).join('') + '</section>';
+      });
+      list.innerHTML = html;
+      empty.style.display = hits.length ? 'none' : 'block';
+      countEl.textContent = hits.length === rows.length ? 'Showing all ' + rows.length + ' URLs' : 'Showing ' + hits.length + ' of ' + rows.length + ' URLs';
+    }
+
+    list.addEventListener('click', function (e) {
+      var btn = e.target.closest('.copy-btn');
+      if (!btn) return;
+      var url = rows[+btn.dataset.i].url;
+      var done = function (label) {
+        btn.textContent = label;
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      };
+      var selectIt = function () {
+        var range = document.createRange();
+        range.selectNodeContents(btn.parentElement.querySelector('code'));
+        var sel = getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        done('Selected');
+      };
+      try { navigator.clipboard.writeText(url).then(function () { done('Copied'); }, selectIt); } catch (err) { selectIt(); }
+    });
+
+    document.querySelectorAll('.seg button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        scheme = b.dataset.s;
+        document.querySelectorAll('.seg button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+        render();
+      });
+    });
+    q.addEventListener('input', render);
+    sec.addEventListener('change', render);
+
+    fetch('/shortcuts/settings-urls.json')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        rows = data;
+        rows.forEach(function (r) { if (sections.indexOf(r.section) === -1) sections.push(r.section); });
+        sections.forEach(function (s) {
+          var o = document.createElement('option'); o.value = s; o.textContent = s; sec.appendChild(o);
+        });
+        render();
+      })
+      .catch(function () { countEl.textContent = "Couldn't load the URL list. Try reloading the page."; });
+  })();
+</script>
+
+<script>
+  // Close the Shortcuts menu on outside click or Escape
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.nav-dd[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') document.querySelectorAll('.nav-dd[open]').forEach(function (d) { d.removeAttribute('open'); });
+  });
+</script>
+
+</body>
+</html>
