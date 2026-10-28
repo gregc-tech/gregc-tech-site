@@ -119,7 +119,7 @@ img { max-width: 100%; display: block; }
 
 .nav-links a:hover { background: rgba(255, 255, 255, 0.35); }
 
-.nav-links a[aria-current="page"] { background: rgba(255, 255, 255, 0.45); }
+.nav-links a[aria-current="page"], .nav-links a[aria-current="page"]:hover { background: var(--ink); color: #fff; font-weight: 600; }
 
 .nav-links a.cta {
   background: var(--ink);
@@ -574,7 +574,7 @@ img { max-width: 100%; display: block; }
 }
 .nav-dd[open] summary::after { transform: translateY(0) rotate(-135deg); }
 .nav-dd summary:hover, .nav-dd[open] summary { background: rgba(255, 255, 255, 0.35); }
-.nav-dd summary.nav-dd-active { background: rgba(255, 255, 255, 0.45); }
+.nav-dd summary.nav-dd-active, .nav-dd summary.nav-dd-active:hover, .nav-dd[open] summary.nav-dd-active { background: var(--ink); color: #fff; font-weight: 600; }
 
 .nav-dd-menu {
   position: absolute;
