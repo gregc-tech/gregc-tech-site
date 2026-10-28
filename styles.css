@@ -437,7 +437,7 @@ img { max-width: 100%; display: block; }
 .print-head h1 { font-size: 20pt; }
 
 /* Shortcuts pages */
-.sc-intro { max-width: 680px; color: var(--muted); margin: 0 0 28px; }
+.sc-intro { color: var(--muted); margin: 0 0 28px; }
 
 .sc-grid {
   display: grid;
